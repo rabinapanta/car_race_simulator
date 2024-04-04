@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Race Simulation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Car Race Simulation</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body style="background-color: rgb(199, 211, 211);">
-    <h1>Car Race Simulation</h1>
-    <div id="race-info"></div>
-
-    <script src="car_race.js"></script>
+<body>
+<div class="container">
+  <h1>Car Race Simulation</h1>
+  <div class="race-track">
+    <!-- Car elements will be added here dynamically -->
+  </div>
+  <div class="controls">
+    <button id="next-turn-btn">Next Turn</button>
+  </div>
+  <div id="car-details" class="car-details">
+    <!-- Car details will be displayed here dynamically -->
+  </div>
+  <div id="race-details" class="race-details">
+    <!-- Race details will be displayed here dynamically -->
+  </div>
+</div>
+<script src="car_race.js"></script>
 </body>
 </html>
