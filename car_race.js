@@ -6,7 +6,8 @@ class Car {
       this.color = color;
       this.price = price;
       this.gas = gas;
-      this.speed = Math.random() * 5 + 1; // Random speed between 1 and 5
+      // this.speed = Math.random() * 5 + 1; // Random speed between 1 and 5
+      this.speed = 70; // Fixed speed of 10
       this.position = 0; // Initial position at the leftmost part
 
       this.element = document.createElement('div');
@@ -18,12 +19,12 @@ class Car {
       this.move(); // Move the car to the starting position
   }
 
-  move(totalGas) {
+  move() {
     if (this.gas > 0) {
-        const gasPercentage = this.gas / totalGas; // Calculate gas percentage
-        const distance = gasPercentage * 100; // Calculate distance to move based on gas percentage
-        this.position += this.speed * distance; // Move based on gas percentage
-        this.element.style.marginLeft = `${this.position}px`; // Move the car horizontally
+        const trackWidth = document.querySelector('.race-track').offsetWidth - this.element.offsetWidth; // Calculate the width of the track
+        const distance = this.speed; // Fixed speed for each car
+        this.position += distance; // Move the car horizontally
+        this.element.style.marginLeft = `${this.position}px`;
         this.gas -= 5 + (new Date().getFullYear() - this.year); // Consume gas
         if (this.gas <= 0) {
             this.gas = 0;
@@ -32,6 +33,7 @@ class Car {
         this.updateDetails();
     }
 }
+
 
 
 
@@ -55,7 +57,7 @@ class Car {
 const cars = [
   new Car('Honda', 'CR-V', 2023, 'Red', 50000, 45, 1),
   new Car('Ford', 'F-150', 2020, 'Black', 25000, 30, 2),
-  new Car('BMW', 'X5', 2022, 'Green', 60000, 65, 3),
+  new Car('BMW', 'X5', 2022, 'Magenta', 60000, 65, 3),
   new Car('Mazda', 'CX-5', 2019, 'Gold', 15000, 60, 4),
   new Car('Audi', 'Q7', 2018, 'Silver', 52000, 47, 5),
   new Car('Kia', 'Forte', 2020, 'Blue', 21000, 56, 6)
@@ -74,13 +76,13 @@ document.getElementById('next-turn-btn').addEventListener('click', () => {
       return;
   }
 
-  const totalGas = cars.reduce((total, car) => total + car.gas, 0); // Calculate total gas of all cars
   cars.forEach(car => {
-      car.move(totalGas);
+      car.move();
   });
   currentTurn++;
   updateRaceDetails(); // Update race details after each turn
 });
+
 
 
 function updateRaceDetails() {
